@@ -125,7 +125,7 @@
                 "target":"_blank"
             },{
                 "id": "",
-                "name": "EnvironmentCheck1.0文件下载（外网）",
+                "name": "EnvironmentCheck1.0文件下载",
                 "url":"https://pan.baidu.com/s/1slUdz8D/#list/path=%2Fwangxch_shared%2Forigin%2Fdmst",
                 "title": "title",
                 "target":"_blank"
@@ -137,8 +137,8 @@
         "content":[
             {
                 "id": "",
-                "name": "值日表（外网）",
-                "url":"https://www.qhftdx.cn/origin/dmst/workingArrangement/duty",
+                "name": "值日表",
+                "url":"https://bpwangxch.github.io/dmst139/workingArrangement/duty",
                 "title": "title",
                 "target":"_blank"
             }
