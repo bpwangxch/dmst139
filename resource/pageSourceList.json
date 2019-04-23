@@ -1,0 +1,166 @@
+[
+    {
+        "id":"",
+        "title":"链接",
+        "content":[
+            {
+                "id": "",
+                "name": "王兴春的资源",
+                "url":"./views/wangxch.html",
+                "title": "title",
+                "target":"_blank"
+            }
+        ]
+    },{
+        "id":"",
+        "title":"临时页面",
+        "content":[
+            {
+                "id": "",
+                "name": "保护地综合服务平台表单模板——具体信息（内网）",
+                "url":"http://dmyf01/website/tmp/BootstrapTableDemo/BootstrapTableDemo.html",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "保护地综合服务平台MapServer",
+                "url":"http://223.220.250.154/NPGISPSPmapServices",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "保护地综合服务平台表单",
+                "url":"http://223.220.250.154/NPGISPSPWebServices",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "保护地综合服务平台后台管理系统（限制访问）",
+                "title": "title",
+                "url":"#",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "可可西里国家级自然保护区生物多样性保护查询系统",
+                "url":"http://223.220.250.154:8083/Biodiversity",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "可可西里公众宣教展示系统",
+                "url":"http://223.220.250.154:8085/",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "保护区服务API接口（内网）",
+                "url":"http://dmyf01/BHQDMService/DM.asmx",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "Gitlab（内网）",
+                "url":"http://wangxchvm:8083/users/sign_in",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "生物多样性保护查询系统和公众宣教展示系统基础运行环境测试程序EnvironmentCheck（内网）",
+                "url":"http://dmyf01:8083/environmentcheck",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "GeoServer（内网）",
+                "url":"http://dmyf01:8081/geoserver/web",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "共享文件夹（可以在资源管理器或者ftp客户端运行，使用匿名用户登录）（内网）",
+                "url":"ftp://dmyf01:3721",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "禅道项目管理系统",
+                "url":"http://qhftdx.cn:81/zentao/user-login.html",
+                "title": "title",
+                "target":"_blank"
+            }
+        ]
+    },{
+        "id":"",
+        "title":"常用软件",
+        "content":[
+            {
+                "id": "",
+                "name": "所有软件（内网）",
+                "url":"http://dmyf01:8086/software/",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "ArcGIS DeskTop（内网）",
+                "url":"http://dmyf01:8086/software/GIS/ArcGIS Desktop/",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "保护地综合服务平台后台管理系统1.0（内网）",
+                "url":"http://dmyf01:8086/software/duomei/保护地综合服务平台后台管理系统1.0.exe",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "CorelDRAW 全集 2018（内网）",
+                "url":"http://dmyf01:8086/software/%E5%B7%A5%E7%A8%8B%E7%BB%98%E5%9B%BE/CorelDRAW%20%E5%85%A8%E9%9B%86%202018.7z",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "LJ-Pro-200-color-MFP-M276打印机驱动（内网）",
+                "url":"http://dmyf01:8086/software/duomei/%E6%89%93%E5%8D%B0%E6%9C%BA%E9%A9%B1%E5%8A%A8/LJ-Pro-200-color-MFP-M276-full-solution-15188.exe",
+                "title": "title",
+                "target":"_blank"
+            },{
+                "id": "",
+                "name": "EnvironmentCheck1.0文件下载（外网）",
+                "url":"https://pan.baidu.com/s/1slUdz8D/#list/path=%2Fwangxch_shared%2Forigin%2Fdmst",
+                "title": "title",
+                "target":"_blank"
+            }
+        ]
+    },{
+        "id":"",
+        "title":"通知公告",
+        "content":[
+            {
+                "id": "",
+                "name": "值日表（外网）",
+                "url":"https://www.qhftdx.cn/origin/dmst/workingArrangement/duty",
+                "title": "title",
+                "target":"_blank"
+            }
+        ]
+    },{
+        "id":"",
+        "title":"其它共享",
+        "content":[
+            {
+                "id": "",
+                "name": "电影（内网）",
+                "url":"http://dmyf01:8086/media/video/",
+                "title": "title",
+                "target":"_blank"
+            },
+            {
+                "id": "",
+                "name": "音乐（内网）",
+                "url":"http://dmyf01:8086/media/music/",
+                "title": "title",
+                "target":"_blank"
+            }
+        ]
+    }
+]

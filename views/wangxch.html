@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<title>系统研发部--王兴春</title>
+	<link rel="stylesheet" href="../css/style.css" media="screen">
+</head>
+<body>
+<div class="main">
+	<div id="head">
+		<div id=title>
+			<span>
+			<a>系统研发部</a>
+			</span>
+		</div>
+	</div>
+	<div id="view-content">
+		<marquee><span style="font-weight: bolder;color: red;">1. 本站点部分资源只能在青海多美生态环保科技有限办公室内有效，如果有解压密码，请与王兴春联系。</span></marquee>
+	</div>
+	<div class="view-footer">
+		<em><a style="text-decoration:none;color:#333;" target="_blank" href="http://www.qhftdx.cn/origin/dmst/">青海多美生态环保科技有限公司系统研发部维护</a></em>
+	</div>
+</div>
+<script type="text-javascript" src="../jquery/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$(window).load(function(){
+			layout();
+		});
+		$(window).resize(function(){
+			layout();
+		});
+		function layout(){
+			$("#view-content").css("height",$(window).height()-$("#head").height()-$(".view-footer").height()-2+"px");
+		}
+		initnews();
+		function initnews(){
+            $.ajax({
+                url:"../resource/wangxch.pageSourceList.json",
+                dataType:"json",
+                type:"get",
+                success:function(data){
+                    $.each(data,function(i, obj){
+                        var news_item=$('<h3>' + obj.title + '</h3>');
+						var news_itemol = $('<ol class="news-list"></ol>');
+						
+						for(var i=0;i<obj.content.length;i++){
+							news_itemol.append(
+								$(
+									'<li><a target="' + obj.content[i].target + '" href="' + obj.content[i].url + '" title="' + obj.content[i].title + '">' + obj.content[i].name + '</a></li>'
+								)
+							);
+						}
+						news_item.append(news_itemol);
+                        $("#view-content").append(news_item);
+                    });
+                }
+            });
+        }
+	});
+</script>
+</body>
+</html>

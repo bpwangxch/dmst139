@@ -1,0 +1,189 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ol3 wms</title>
+    <link rel="stylesheet" type="text/css" href="../css/ol/ol.css"/>
+    <style type="text/css">
+        body, #map {
+            border: 0;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-size: 13px;
+        }
+        #popup-content>div{
+            background-color: white;
+            border: 1px solid #939393;
+            max-width: 300px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 0 10px;
+        }
+    </style>
+    <script type="text/javascript" src="../js/ol3/ol.js"></script>
+    <script type="text/javascript" src="../js/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
+        function init(){
+            var pureCoverage = false;
+            // if this is just a coverage or a group of them, disable a few items,
+            // and default to jpeg format
+            var format = 'image/png';
+            var bounds = [99.58016245193568, 36.46268217843982,
+                100.87925668544774, 37.25559372676911];
+            if (pureCoverage) {
+                document.getElementById('antialiasSelector').disabled = true;
+                document.getElementById('jpeg').selected = true;
+                format = "image/jpeg";
+            }
+
+            var mousePositionControl = new ol.control.MousePosition({
+                className: 'custom-mouse-position',
+                target: document.getElementById('location'),
+                coordinateFormat: ol.coordinate.createStringXY(5),
+                undefinedHTML: '&nbsp;'
+            });
+
+
+
+            var untiled = new ol.layer.Image({
+                source: new ol.source.ImageWMS({
+                    ratio: 1,
+                    url: 'http://192.168.2.2:8081/geoserver/QHH/wms',
+                    params: {'FORMAT': format,
+                        'VERSION': '1.1.1',
+                        "LAYERS": 'QHH:p111protectareaP',
+                        "exceptions": 'application/vnd.ogc.se_inimage',
+                    }
+                })
+            });
+
+            var tiled = new ol.layer.Tile({
+                visible: false,
+                source: new ol.source.TileWMS({
+                    url: 'http://192.168.2.2:8081/geoserver/QHH/wms',
+                    params: {'FORMAT': format,
+                        'VERSION': '1.1.1',
+                        tiled: true,
+                        "LAYERS": 'QHH:p111protectareaP',
+                        "exceptions": 'application/vnd.ogc.se_inimage',
+                        tilesOrigin: 99.58016245193568 + "," + 36.46268217843982
+                    }
+                })
+            });
+
+            var projection = new ol.proj.Projection({
+                code: 'EPSG:4326',
+                extent: [-180, -90, 180, 90]
+            });
+
+            var view = new ol.View({
+                center: [100.1634, 36.90758],
+                projection: projection,
+                minZoom: 1,
+                maxZoom: 18,
+                zoom: 10
+            });
+
+            var controls = ol.control.defaults({
+                attribution: false,
+                rotate: false,
+                zoom: false
+            }).extend([mousePositionControl]);
+
+            var imageBaseLayers = initImgtorBaseLayers(projection, true);
+
+            var map = new ol.Map({
+                target: "map",
+                logo: false,
+                controls: controls,
+                layers: new Array().concat(imageBaseLayers, untiled),
+                view: view
+            });
+            map.on('singleclick', function(evt) {
+                var viewResolution = map.getView().getResolution();
+                var source = untiled.get('visible') ? untiled.getSource() : tiled.getSource();
+                var url = source.getGetFeatureInfoUrl(evt.coordinate, viewResolution, view.getProjection(),
+                        {'INFO_FORMAT': 'text/html', 'FEATURE_COUNT': 50});
+                console.log(url);
+                $.ajax({
+                    type: 'GET',
+                    url:url,
+                    dataType: 'jsonp',
+                    jsonp:'format_options',
+                    jsonpCallback:"callback:success_jsonpCallback"
+                });
+            });
+
+            var geojsonFormat=new ol.format.GeoJSON({defaultDataProjection:view.getProjection()});
+            function success_jsonpCallback(res)
+            {
+                var features=geojsonFormat.readFeatures(res);
+                console.log('点击查询返回的结果如下：');
+                console.log(features);
+            }
+
+
+            function initImgtorBaseLayers(projection, visible) {
+                var vectorBaseLayers = [
+                    new ol.layer.Tile({
+                        id: "img_c",
+                        source: new ol.source.XYZ({
+                            url: 'http://t{0-7}.tianditu.com/DataServer?T=img_c&x={x}&y={y}&l={z}&tk=38ccfda7b9d13697ad4df096add41eee',
+                            projection: projection
+                        }),
+                        visible: visible
+                    }),
+                    new ol.layer.Tile({
+                        id: "cia_c",
+                        source: new ol.source.XYZ({
+                            url: 'http://t{0-7}.tianditu.com/DataServer?T=cia_c&x={x}&y={y}&l={z}&tk=38ccfda7b9d13697ad4df096add41eee',
+                            projection: projection
+                        }),
+                        visible: visible
+                    })
+                ];
+                return vectorBaseLayers;
+            }
+            var element = document.getElementById('popup-content');
+            var popup = new ol.Overlay({
+                element: element,
+                autoPan: true,
+                autoPanAnimation: {
+                    duration: 250
+                },
+                positioning: 'top-center'
+            });
+            map.addOverlay(popup);
+            /*map.on('singleclick',mapClick);
+            function mapClick(e){
+                var coordinate = e.coordinate;
+                var pixel = map.getEventPixel(e.originalEvent);
+
+                var i = 0;
+                featureInfo = map.forEachFeatureAtPixel(e.pixel, function(feature) {
+                    element.innerHTML = '<div><p>' + '机构代：' +  feature.get('机构代') + '</p>' +
+                            '<p>' + '名称：' +  feature.get('名称') + '</p>' +
+                            '<p>' + '分类：' +  feature.get('分类') + '</p>' +
+                            '<p>' + '长度：' +  feature.get('Shape_Leng') + '</p>' +
+                            '<p>' + '面积：' +  feature.get('Shape_Area') + '</p></div>';
+                    i++;
+                });
+                if(i == 0){
+                    element.innerHTML = '<div><p style="text-indent: 2em;">'+'青海湖国家级自然保护区位于青藏高原东北部，其范围包括青海湖整个水域及鸟类繁殖、栖息的岛屿、滩涂和湖岸湿地，地跨二州三县。'+ '</p>' +
+                                    '<p style="text-indent: 2em;">'+'保护区始建于1975年，是中国最早被列入《关于特别是作为水禽栖息地的国际重要湿地公约》（拉姆萨尔公约）国际重要湿地名录的保护区。'+'</p>'+
+                            '<p style="text-indent: 2em;">'+'青海湖国家级自然保护区是全民事业型单位，由青海省景区保护利用管理局托管，业务上归口青海省林业局主管，是以保护青海湖湿地以及鸟类资源及其栖息地为宗旨，集资源保护、科学研究、生态旅游于一体的自然保护区。根据《自然保护区类型与级别划分原则》（GB/T14529—93）该保护区属于“自然生态系统类”的“湿地系统类型”的国家级自然保护区。'+'</p></div>';
+                }
+                popup.setPosition(coordinate);
+            }*/
+        }
+    </script>
+</head>
+<body onLoad="init()">
+<div id='map' style='width:100%;height:100%;'></div>
+<div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+html,body,#mapView {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-size: 1.1em;;
+}
+
+#layer-control{
+    width: 60px;
+    height: 60px;
+    background-color: aqua;
+    position: fixed;
+    bottom: 45px;
+    right: 20px;
+    z-index: 999;;
+}
+#layer-control img{
+    width: 60px;
+    height: 60px;
+}
+#layer-name{
+    text-align: center;
+}
+#zoom-control{
+    width: 30px;
+    height: 60px;
+    position: fixed;
+    right: 32px;
+    bottom: 120px;
+    padding: 3px;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 1.4em;
+    background-color: white;
+}
+#zoom-control div{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+#zoom-control div:first-child{
+    border-bottom: 1px solid black;
+}

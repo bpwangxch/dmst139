@@ -1,0 +1,22 @@
+[
+    {
+        "id":"",
+        "title":"临时页面",
+        "content":[
+            {
+                "id": "",
+                "name": "返回主页",
+                "url":"../",
+                "title": "return",
+                "target":"_self"
+            },
+            {
+                "id": "",
+                "name": "GitHub",
+                "url":"https://github.com/bpwangxch",
+                "title": "王兴春的GitHub",
+                "target":"_blank"
+            }
+        ]
+    }
+]
